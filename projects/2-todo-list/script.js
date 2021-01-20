@@ -109,10 +109,16 @@ function addNewTodo(event) {
     task: document.getElementById("todoInput").value,
     completed: false,
   };
+<<<<<<< HEAD
   if (newTodo.task) {
     addTaskToList(newTodo);
   document.getElementById("todoInput").value = "";
   }
+=======
+  addTaskToList(newTodo);
+  document.getElementById("todoInput").value = "";
+  // Write your code here... and remember to reset the input field to be blank after creating a todo!
+>>>>>>> 571d180658475f3445b0e90e631c4818cf6e2b05
 }
 
 // A function that checks the todos in the todo list and deletes the completed ones
