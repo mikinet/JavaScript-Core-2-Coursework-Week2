@@ -1,6 +1,5 @@
 let elements = [
   {
-    order: 0,
     type: "li",
     class: [
       "list-group-item",
@@ -11,21 +10,18 @@ let elements = [
     parentSelector: "#todo-list",
   },
   {
-    order: 1,
     type: "span",
     class: ["badge", "bg-primary", "rounded-pill"],
     parentSelector: ".list-group-item",
   },
 
   {
-    order: 2,
     type: "i",
     class: ["fa", "fa-check"],
     "aria-hidden": true,
     parentSelector: ".badge",
   },
   {
-    order: 3,
     type: "i",
     class: ["fa", "fa-trash"],
     "aria-hidden": true,
