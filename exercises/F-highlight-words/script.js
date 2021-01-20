@@ -1,12 +1,12 @@
 /********** Declare (and initialize) html element variables **********/
 // label
-let labelKeys = ["type", "for", "innerText", "parentID", "parentType",];
+let labelKeys = ["type", "for", "innerText", "parentID", "parentType"];
 let labelValues = [
   "label",
   "#colours",
   "Select a highlight colour: ",
   "#content",
-  "div"
+  "div",
 ];
 
 // select
@@ -69,7 +69,7 @@ function highlightWords(paragraph, colours) {
   for (let i = 0; i < keyValuePairs.length; i++) {
     htmlElements.push(createObjects(keyValuePairs[i])); // add objects to htmlElements
   }
- // create an html element based on each object in htmlElements array and append it to its parent node
+  // create an html element based on each object in htmlElements array and append it to its parent node
   htmlElements.flat().forEach(createAddElement);
 }
 
@@ -80,25 +80,25 @@ function createObjects(objProperty, i = 0, array = []) {
   // }
 
   // try {
-    let keys = objProperty[0];
-    let values = objProperty[1];
-    let obj = {};
+  let keys = objProperty[0];
+  let values = objProperty[1];
+  let obj = {};
 
-    if (Array.isArray(values[i])) {
-      keys.forEach(function (key, index) {
-        obj[key] = values[i][index];
-      });
-      array.push(obj);
-      if (++i < values.length) {
-        createObjects(objProperty, i, array);
-      }
-    } else {
-      keys.forEach(function (key, index) {
-        obj[key] = values[index];
-      });
-      array.push(obj);
+  if (Array.isArray(values[i])) {
+    keys.forEach(function (key, index) {
+      obj[key] = values[i][index];
+    });
+    array.push(obj);
+    if (++i < values.length) {
+      createObjects(objProperty, i, array);
     }
-    return array;
+  } else {
+    keys.forEach(function (key, index) {
+      obj[key] = values[index];
+    });
+    array.push(obj);
+  }
+  return array;
   // } catch (e) {
   //   console.log(e);
   // }
@@ -117,7 +117,7 @@ function createAddElement(element) {
     case "label":
       el.for = element.for;
       el.innerText = element.innerText;
-      parent = document.querySelector(element.parentID)
+      parent = document.querySelector(element.parentID);
       break;
     case "select":
       el.name = element.name;
@@ -135,7 +135,7 @@ function createAddElement(element) {
       parent = document.querySelector(element.parentID);
     case "span":
       el.innerText = element.innerText;
-      parent = document.querySelector(element.parentType)
+      parent = document.querySelector(element.parentType);
       break;
     default:
       return;
@@ -153,16 +153,27 @@ highlightWords(paragraph, colours);
 
 /************** <span> elements click event *************/
 let spanElements = document.querySelectorAll("p span"); // cllect all span elements
-spanElements.forEach(addClickEvent);  // add a 'click' event for each span element
+spanElements.forEach(addClickEvent); // add a 'click' event for each span element
 
 // The function
 function addClickEvent(span) {
   span.addEventListener("click", function (e) {
-    let colour = document.getElementById("colours").value;  // currently selected colour in the dropdown list
-    if (colour === "none" || span.style.backgroundColor === colour) { 
+    let colour = document.getElementById("colours").value; // currently selected colour in the dropdown list
+    if (colour === "none" || span.style.backgroundColor === colour) {
       e.target.style.backgroundColor = "transparent";
     } else {
       e.target.style.backgroundColor = colour;
     }
   });
 }
+
+// Make sure any existing highlight colour is removed from the paragraph
+let select = document.getElementById("colours");
+select.onchange = function () {
+  console.log(select);
+  if (select.value === "none") {
+    spanElements.forEach(
+      (span) => (span.style.backgroundColor = "transparent")
+    );
+  }
+};
