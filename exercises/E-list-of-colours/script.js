@@ -3,8 +3,6 @@ function listOfColours(colours) {
   for (let i = 0; i < elements.length; i++) {
     addElements(elements[i], elements[i].type, elements[i].quantity); // call addElements function
   }
-  // let p = document.querySelector("p"); // paragraph
-  // p.style.color = p.color; // set initial font colour for p
 }
 
 // A function to create and add html elements
@@ -23,17 +21,16 @@ function addElements(element, type, quantity = 1, index = 0) {
         el[key] = element[key]; // assign whatever value the current property of element has to el
       }
     }
-    // create event and event handler for an <option> element
+    // create event and event handler for the <select> element
     el.addEventListener("click", function () {
       let p = document.querySelector("p");
       if (el.value) {
-        if (document.querySelector("select").childNodes[0].value === "") {
+        if (document.querySelector("select")[0].value === "") {
           document.querySelector("select").childNodes[0].remove();
         }          
         p.querySelector("span").innerText = el.value;
         p.style.color = el.value;
       }
-      console.log(document.querySelector("select"));
     });
 
     parent.appendChild(el);
