@@ -19,7 +19,11 @@ function createElement(value = "", type, eventName = "") {
         if (bgdColour === "none") {
           el.style.backgroundColor = "transparent";
         } else {
-          el.style.backgroundColor = bgdColour;
+          if (el.style.backgroundColor === bgdColour) {
+            el.style.backgroundColor = "transparent";
+          } else {
+            el.style.backgroundColor = bgdColour;
+          }            
         }
       });
       break;
