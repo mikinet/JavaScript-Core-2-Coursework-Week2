@@ -1,22 +1,24 @@
 function listOfColours(colours) {
-  let selectEl = document.createElement("select");
-  let paragraphEl = document.createElement("p");
-  let divEl = document.getElementById("content");
+  let content = document.getElementById("content");
+  let select = document.createElement("select");
+  let p = document.createElement("p");
 
-  divEl.appendChild(selectEl);
-  divEl.appendChild(paragraphEl);
+  content.appendChild(select);
+  content.appendChild(p);
 
   colours.forEach((colour) => {
-    paragraphEl.innerText = `You have selected: ${colour}`;
-    let optionEl = document.createElement("option");
-    optionEl.innerText = colour;
-    optionEl.value = colour;
-    selectEl.appendChild(optionEl);
+    let option = document.createElement("option");
+    option.innerText = colour;
+    option.value = colour;
+    select.appendChild(option);
   });
-  selectEl.addEventListener("click", function () {
-    paragraphEl.style.color = selectEl.value;
+
+  p.innerText = `You have selected: `;
+  select.addEventListener("click", function () {
+    p.innerText = `You have selected: ${select.value}`;
+    p.style.color = select.value;
   });
 }
 
-const colours = ["red", "blue", "green", "yellow", "pink", "brown"];
+const colours = ["", "red", "blue", "green", "yellow", "pink", "brown"];
 listOfColours(colours);
