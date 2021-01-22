@@ -1,3 +1,4 @@
+// Create preliminary object frameworks
 let elements = [
   {
     type: "li",
@@ -41,7 +42,7 @@ function addTaskToList(todo) {
   let checkObj = elements.filter((element) => element.type === "i")[0];
   let trashObj = elements.filter((element) => element.type === "i")[1];
 
-  let li, span, check, trash;
+  let li, span, check, trash; // list item, span, tick button, delete button
 
   listItemObj.innerText = todo.task;
   listItemObj.completed = todo.completed;
@@ -50,9 +51,10 @@ function addTaskToList(todo) {
   check = createHtmlElement(checkObj, span);
   trash = createHtmlElement(trashObj, span);
 
-  check.addEventListener("click", updateTask);
-  trash.addEventListener("click", deleteTask);
+  check.addEventListener("click", updateTask); // to update task as completed or not
+  trash.addEventListener("click", deleteTask); // to delete a task from the list
 }
+
 // A function to create and append an html element
 function createHtmlElement(obj, parentNode) {
   let el = document.createElement(obj.type);
@@ -66,6 +68,9 @@ function createHtmlElement(obj, parentNode) {
     } else {
       el.style.textDecoration = "none";
     }
+  }
+  if (obj["aria-hidden"]) {
+    el.setAttribute("aria-hidden", true);
   }
   if (parentNode) {
     parentNode.appendChild(el);
@@ -97,7 +102,7 @@ let todos = [
 
 populateTodoList(todos);
 
-// This function will take the value of the input field and add it as a new todo to the bottom of the todo list. 
+// This function will take the value of the input field and add it as a new todo to the bottom of the todo list.
 function addNewTodo(event) {
   // The code below prevents the page from refreshing when we click the 'Add Todo' button.
   event.preventDefault();
@@ -107,7 +112,7 @@ function addNewTodo(event) {
   };
   if (newTodo.task) {
     addTaskToList(newTodo);
-  document.getElementById("todoInput").value = "";
+    document.getElementById("todoInput").value = "";
   }
 }
 
@@ -119,16 +124,13 @@ function deleteAllCompletedTodos() {
   button.style.backgroundColor = "white";
   button.style.color = "red";
   button.classList.add("btn", "mb-1");
-  
-  button.addEventListener('click', function () {
-    document
-      .querySelectorAll("#todo-list li")
-      .forEach(li => {
-        if (li.style.textDecoration === "line-through") {
-          li.remove();
-        }
-      });
-  })
+
+  button.addEventListener("click", function () {
+    document.querySelectorAll("#todo-list li").forEach((li) => {
+      if (li.style.textDecoration === "line-through") {
+        li.remove();
+      }
+    });
+  });
 }
 deleteAllCompletedTodos();
-
